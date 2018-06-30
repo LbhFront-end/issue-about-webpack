@@ -55,15 +55,71 @@ npm install webpack webpack-cli --save-dev
 `src/index.js`
 
     import _ from 'lodash';
-    
     function component() {
         var element = document.createElement('div');
-
-    -   // Lodash, currently included via a script, is required for this line to work
-    +   // Lodash, now imported by this script
         element.innerHTML = _.join(['Hello', 'webpack'], ' ');
 
         return element;
     }
 
     document.body.appendChild(component());
+
+`dist/index.html`
+
+    <!doctype html>
+    <html>
+    <head>
+        <title>起步</title>
+    </head>
+    <body>
+           <script src="main.js"></script>
+    </body>
+    </html>
+
+执行 `npx webpack`，会将我们的脚本作为入口起点，然后 输出 为 `main.js`
+
+模块
+------------------------
+
+`webpack` 支持 `ES6` 中的 `import` 和 `export` 语句，它会在幕后进行代码'转译'
+
+使用一个配置文件
+-----------------------
+
+文件夹根上添加一个文件 `webpack.config.js`
+
+    const path = require('path');
+    module.exports = {
+        entry:'./src/index.js',
+        output:{
+            filename:'bundle.js',
+            path:path.resolve(__dirname,'dist')
+        }
+    }
+
+解释：  
+
+1. `exports` 和 `module.exports` 的区别
+
+`module.exports` 初始值为一个空对象 `{}`  
+`exports` 是指向的 `module.exports` 的引用  
+`require()` 返回的是 `module.exports` 而不是 `exports`
+
+2. `path.resolve()`
+
+这一方法将一系列路径或者路径段解析为 **绝对路径**  
+语法：
+
+>path.resolve([from,...],to)  
+
+说明：将参数 `to` 位置的字符解析到了一个 **绝对路径里**  
+参数说明  
+`from` 源路径  
+`to` 将被解析到绝对路径的字符串
+
+3. `__dirname` 与 `__filename`
+
+`__filename`  
+在 `node.js` 中，任何模块文件内部，可以使用 `__filename` 变量获取当前模块文件的带有完整绝对路径的文件名
+
+`__dirname` 可以获得当前文件所在目录的完整目录名
