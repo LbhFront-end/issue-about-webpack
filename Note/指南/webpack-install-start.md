@@ -123,3 +123,31 @@ npm install webpack webpack-cli --save-dev
 在 `node.js` 中，任何模块文件内部，可以使用 `__filename` 变量获取当前模块文件的带有完整绝对路径的文件名
 
 `__dirname` 可以获得当前文件所在目录的完整目录名
+
+`NPM` 脚本
+--------------------------
+
+用 `CLI` 这种方式来运行本地的 `webpack` 不是特别方便，我们可以设置一个快捷方式。在 `package.json` 添加一个 `npm` 脚本(npm script)：
+
+`package.json`
+
+    {
+        "name": "webpack-demo",
+        "version": "1.0.0",
+        "description": "",
+        "main": "index.js",
+        "scripts": {
+            "test": "echo \"Error: no test specified\" && exit 1",
+            "build": "webpack"
+        },
+        "keywords": [],
+        "author": "",
+        "license": "ISC",
+        "devDependencies": {
+            "webpack": "^4.0.1",
+            "webpack-cli": "^2.0.9",
+            "lodash": "^4.17.5"
+        }
+    }
+
+现在，可以使用 `npm run build` 命令，来替代我们之前使用的 `npx` 命令。注意，使用 `npm` 的 `scripts`，我们可以像使用 `npx` 那样通过模块名引用本地安装的 `npm`` 包。这是大多数基于 npm 的项目遵循的标准，因为它允许所有贡献者使用同一组通用脚本（如果必要，每个 flag 都带有 --config 标志）。
