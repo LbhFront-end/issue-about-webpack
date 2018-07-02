@@ -1,8 +1,7 @@
 @font-face {
     font-family: 'MyFont';
     src: url('./my-font.otf') format('otf'), url('./my-font2.otf') format('otf');
-    font-weight: 600;
-    font-style: normal;
+    font-weight: 700;
 }
 
 .hello {
