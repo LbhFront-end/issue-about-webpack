@@ -15,6 +15,7 @@ module.exports = {
         path: path.resolve(__dirname, 'dist'),
         publicPath: '/'
     },
+    mode:"production",
     devtool: 'inline-source-map',
     devServer: {
         contentBase: './dist',
