@@ -20,13 +20,15 @@
 
 通过配置好 `loader` 并讲字体文件放在合适的位置，可以通过 `@font-face` 声明引入，本地的 `url(..)` 指令会被 `webpack` 获取处理，就像它处理图片资源一样
 
-     @font-face {
-       font-family: 'MyFont';
-       src:  url('./my-font.woff2') format('woff2'),
-             url('./my-font.woff') format('woff');
-       font-weight: 600;
-       font-style: normal;
-     }
+```javascript
+ @font-face {
+   font-family: 'MyFont';
+   src:  url('./my-font.woff2') format('woff2'),
+         url('./my-font.woff') format('woff');
+   font-weight: 600;
+   font-style: normal;
+ }
+```
 
 加载数据
 ---------------------
@@ -37,29 +39,31 @@
 
 `webpack.config.js`
 
-    const path = require('path');
-    module.exports = {
-        entry: './src/index.js',
-        output: {
-            filename: 'bundle.js',
-            path: path.resolve(__dirname, 'dist')
-        },
-        module: {
-            rules: [{
-                test: /\.css$/,
-                use: ['style-loader', 'css-loader']
-            }, {
-                test: /\.(png|svg|jpg|gif)$/,
-                use: ['file-loader']
-            }, {
-                test: /\.(woff|woff2|eot|ttf|otf)$/,
-                use: ['file-loader']
-            },{
-                test:/\.(csv|tsv)$/,
-                use:['csv-loader']
-            },{
-                test:/\.xml$/,
-                use:['xml-loader']
-            }]
-        }
+```javascript
+const path = require('path');
+module.exports = {
+    entry: './src/index.js',
+    output: {
+        filename: 'bundle.js',
+        path: path.resolve(__dirname, 'dist')
+    },
+    module: {
+        rules: [{
+            test: /\.css$/,
+            use: ['style-loader', 'css-loader']
+        }, {
+            test: /\.(png|svg|jpg|gif)$/,
+            use: ['file-loader']
+        }, {
+            test: /\.(woff|woff2|eot|ttf|otf)$/,
+            use: ['file-loader']
+        },{
+            test:/\.(csv|tsv)$/,
+            use:['csv-loader']
+        },{
+            test:/\.xml$/,
+            use:['xml-loader']
+        }]
     }
+}
+```

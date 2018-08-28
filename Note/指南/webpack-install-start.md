@@ -15,9 +15,11 @@
 
 对于大多数项目，我们建议本地安装。这可以使我们在引入破坏式变更(breaking change)的依赖时，更容易分别升级项目。通常，`webpack` 通过运行一个或多个 `npm scripts`，会在本地 `node_modules` 目录中查找安装的 `webpack`：
 
-    "scripts": {
-        "start": "webpack --config webpack.config.js"
-    }
+```javascript
+"scripts": {
+    "start": "webpack --config webpack.config.js"
+}
+```
 
 起步
 -----------
@@ -29,23 +31,25 @@ npm install webpack webpack-cli --save-dev
 
 `package.json`
 
-    {
-        "name": "",
-        "version": "",
-        "private": true,
-        "devDependencies": {
-            "webpack": "^4.13.0",
-            "webpack-cli": "^3.0.8"
-    },
-        "scripts": {
-            "test": "echo \"Error: no test specified\" && exit 1",
-            "build": "webpack"
-    },
-        "keywords": [],
-        "author": "",
-        "license": "ISC",
-        "dependencies": {}
-    }
+```javascript
+{
+    "name": "",
+    "version": "",
+    "private": true,
+    "devDependencies": {
+        "webpack": "^4.13.0",
+        "webpack-cli": "^3.0.8"
+},
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "build": "webpack"
+},
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "dependencies": {}
+}
+```
 
 安装 `lodash`
 -----------------
@@ -54,27 +58,31 @@ npm install webpack webpack-cli --save-dev
 
 `src/index.js`
 
-    import _ from 'lodash';
-    function component() {
-        var element = document.createElement('div');
-        element.innerHTML = _.join(['Hello', 'webpack'], ' ');
+```javascript
+import _ from 'lodash';
+function component() {
+    var element = document.createElement('div');
+    element.innerHTML = _.join(['Hello', 'webpack'], ' ');
 
-        return element;
-    }
+    return element;
+}
 
-    document.body.appendChild(component());
+document.body.appendChild(component());
+```
 
 `dist/index.html`
 
-    <!doctype html>
-    <html>
-    <head>
-        <title>起步</title>
-    </head>
-    <body>
-           <script src="main.js"></script>
-    </body>
-    </html>
+```javascript
+<!doctype html>
+<html>
+<head>
+    <title>起步</title>
+</head>
+<body>
+       <script src="main.js"></script>
+</body>
+</html>
+```
 
 执行 `npx webpack`，会将我们的脚本作为入口起点，然后 输出 为 `main.js`
 
@@ -88,14 +96,16 @@ npm install webpack webpack-cli --save-dev
 
 文件夹根上添加一个文件 `webpack.config.js`
 
-    const path = require('path');
-    module.exports = {
-        entry:'./src/index.js',
-        output:{
-            filename:'bundle.js',
-            path:path.resolve(__dirname,'dist')
-        }
+```javascript
+const path = require('path');
+module.exports = {
+    entry:'./src/index.js',
+    output:{
+        filename:'bundle.js',
+        path:path.resolve(__dirname,'dist')
     }
+}
+```
 
 解释：  
 
@@ -131,23 +141,25 @@ npm install webpack webpack-cli --save-dev
 
 `package.json`
 
-    {
-        "name": "webpack-demo",
-        "version": "1.0.0",
-        "description": "",
-        "main": "index.js",
-        "scripts": {
-            "test": "echo \"Error: no test specified\" && exit 1",
-            "build": "webpack"
-        },
-        "keywords": [],
-        "author": "",
-        "license": "ISC",
-        "devDependencies": {
-            "webpack": "^4.0.1",
-            "webpack-cli": "^2.0.9",
-            "lodash": "^4.17.5"
-        }
+```javascript
+{
+    "name": "webpack-demo",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "build": "webpack"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "devDependencies": {
+        "webpack": "^4.0.1",
+        "webpack-cli": "^2.0.9",
+        "lodash": "^4.17.5"
     }
+}
+```
 
 现在，可以使用 `npm run build` 命令，来替代我们之前使用的 `npx` 命令。注意，使用 `npm` 的 `scripts`，我们可以像使用 `npx` 那样通过模块名引用本地安装的 `npm`` 包。这是大多数基于 npm 的项目遵循的标准，因为它允许所有贡献者使用同一组通用脚本（如果必要，每个 flag 都带有 --config 标志）。

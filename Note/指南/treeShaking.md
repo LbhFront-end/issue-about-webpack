@@ -8,26 +8,30 @@
 
 `src/math.js`
 
-    export function square(x){
-        return x*x;
-    }
-    export function cube(x){
-        return x*x*x;
-    }
+```javascript
+export function square(x){
+    return x*x;
+}
+export function cube(x){
+    return x*x*x;
+}
+```
 
 `src/index.js`
 
-    import './style.css';
-    import { cube } from './main.js'
-    function component() {
-        var element = document.createElement('pre');
-        element.innerHTML = [
-            'Hello webpack!',
-            '5 cubed is equal to ' + cube(5)
-        ].join('\n\n');
-        return element;
-    }
-    document.body.appendChild(component());
+```javascript
+import './style.css';
+import { cube } from './main.js'
+function component() {
+    var element = document.createElement('pre');
+    element.innerHTML = [
+        'Hello webpack!',
+        '5 cubed is equal to ' + cube(5)
+    ].join('\n\n');
+    return element;
+}
+document.body.appendChild(component());
+```
 
 上例中没有引入 `square` 但是仍然包含在 `bundle` 中
 
@@ -38,10 +42,12 @@
 
 `package.json`
 
-    {
-        "name": "webpack-setting",
-        "sideEffects" : false
-    }
+```javascript
+{
+    "name": "webpack-setting",
+    "sideEffects" : false
+}
+```
 
 如果代码都不包含副作用，那么可以简单地将该属性标记为 `false`,来告知 `webpack` 它可以安全地删除未用到的 `export` 导出
 
@@ -51,30 +57,36 @@
 
 `package.json`
 
-    {
-        "name": "webpack-setting",
-        "sideEffects" : [
-            "./src/some-side-effectful-file.js"
-        ]
-    }
+```javascript
+{
+    "name": "webpack-setting",
+    "sideEffects" : [
+        "./src/some-side-effectful-file.js"
+    ]
+}
+```
 
 >注意，任何导入的文件都会受到 `tree shaking` 的影响。这意味着，如果在项目中使用类似 `css-loader` 并导入 `CSS` 文件，则需要将其添加到 `side effect` 列表中，以免在生产模式中无意中将它删除：
 
 `package.json`
 
-    {
-        "name": "webpack-setting",
-        "sideEffects" : [
-            "./src/some-side-effectful-file.js",
-            "*.css"
-        ]
-    }
+```javascript
+{
+    "name": "webpack-setting",
+    "sideEffects" : [
+        "./src/some-side-effectful-file.js",
+        "*.css"
+    ]
+}
+```
 
 压缩输出
 ------------------
 
 `webpack.config.js`
 
-    module.exports = {
-        mode: "production"
-    }
+```javascript
+module.exports = {
+    mode: "production"
+}
+```
